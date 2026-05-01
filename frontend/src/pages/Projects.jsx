@@ -17,7 +17,7 @@ import {
 
 // ─── Shared dark input class ──────────────────────────────────────────────────
 const darkInput =
-  'w-full bg-[#070b14] border border-[#1e3052] rounded-xl px-4 py-3.5 text-sm text-white placeholder-[#3d5470] focus:outline-none focus:border-indigo-500/70 focus:ring-2 focus:ring-indigo-500/15 hover:border-[#253857] transition-all';
+  'w-full bg-white border border-[#dfe1e6] rounded-xl px-4 py-3.5 text-sm text-[#172b4d] placeholder-[#a5adba] focus:outline-none focus:border-indigo-500/70 focus:ring-2 focus:ring-indigo-500/15 hover:border-[#c1c4cc] transition-all';
 
 // ─── Initials helper ──────────────────────────────────────────────────────────
 function initials(name = '') {
@@ -82,15 +82,15 @@ function CreateProjectModal({ onClose, onCreate }) {
 
   return (
     <Modal onClose={onClose}>
-      <div className="bg-[#0d1525] border border-[#1a2844] rounded-2xl shadow-2xl w-full max-w-md p-6">
+      <div className="bg-white border border-[#dfe1e6] rounded-2xl shadow-2xl w-full max-w-md p-6">
         <div className="flex items-center justify-between mb-6">
           <div>
-            <h2 className="text-lg font-semibold text-white">Create New Project</h2>
-            <p className="text-sm text-[#8899bb] mt-0.5">Set up a new workspace for your team</p>
+            <h2 className="text-lg font-semibold text-[#172b4d]">Create New Project</h2>
+            <p className="text-sm text-[#44546f] mt-0.5">Set up a new workspace for your team</p>
           </div>
           <button
             onClick={onClose}
-            className="p-2 rounded-xl text-[#8899bb] hover:text-white hover:bg-[#142038] transition-all"
+            className="p-2 rounded-xl text-[#44546f] hover:text-[#172b4d] hover:bg-[#ebecf0] transition-all"
           >
             <FiX />
           </button>
@@ -98,8 +98,8 @@ function CreateProjectModal({ onClose, onCreate }) {
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-1.5">
-            <label className="block text-sm font-medium text-[#8899bb]">
-              Project Name <span className="text-red-400">*</span>
+            <label className="block text-sm font-medium text-[#44546f]">
+              Project Name <span className="text-red-500">*</span>
             </label>
             <input
               ref={nameRef}
@@ -112,8 +112,8 @@ function CreateProjectModal({ onClose, onCreate }) {
           </div>
 
           <div className="space-y-1.5">
-            <label className="block text-sm font-medium text-[#8899bb]">
-              Description <span className="text-[#48617a] font-normal">(optional)</span>
+            <label className="block text-sm font-medium text-[#44546f]">
+              Description <span className="text-[#8590a2] font-normal">(optional)</span>
             </label>
             <textarea
               value={form.description}
@@ -138,7 +138,7 @@ function CreateProjectModal({ onClose, onCreate }) {
             <button
               type="button"
               onClick={onClose}
-              className="px-5 py-3 rounded-xl text-sm font-medium bg-[#142038] hover:bg-[#1a2844] text-[#8899bb] hover:text-white border border-[#1a2844] hover:border-[#253857] transition-all"
+              className="px-5 py-3 rounded-xl text-sm font-medium bg-[#f1f2f4] hover:bg-[#ebecf0] text-[#44546f] hover:text-[#172b4d] border border-[#dfe1e6] hover:border-[#c1c4cc] transition-all"
             >
               Cancel
             </button>
@@ -191,15 +191,15 @@ function ManageMembersModal({ project, currentUserId, onClose, onUpdate }) {
 
   return (
     <Modal onClose={onClose}>
-      <div className="bg-[#0d1525] border border-[#1a2844] rounded-2xl shadow-2xl w-full max-w-md p-6 max-h-[90vh] overflow-y-auto">
+      <div className="bg-white border border-[#dfe1e6] rounded-2xl shadow-2xl w-full max-w-md p-6 max-h-[90vh] overflow-y-auto">
         <div className="flex items-center justify-between mb-6">
           <div>
-            <h2 className="text-lg font-semibold text-white">Manage Members</h2>
-            <p className="text-sm text-[#8899bb] mt-0.5 truncate max-w-60">{project.name}</p>
+            <h2 className="text-lg font-semibold text-[#172b4d]">Manage Members</h2>
+            <p className="text-sm text-[#44546f] mt-0.5 truncate max-w-60">{project.name}</p>
           </div>
           <button
             onClick={onClose}
-            className="p-2 rounded-xl text-[#8899bb] hover:text-white hover:bg-[#142038] transition-all"
+            className="p-2 rounded-xl text-[#44546f] hover:text-[#172b4d] hover:bg-[#ebecf0] transition-all"
           >
             <FiX />
           </button>
@@ -207,7 +207,7 @@ function ManageMembersModal({ project, currentUserId, onClose, onUpdate }) {
 
         {/* Members list */}
         <div className="space-y-2 mb-5">
-          <p className="text-xs font-semibold text-[#48617a] uppercase tracking-wider mb-3">
+          <p className="text-xs font-semibold text-[#8590a2] uppercase tracking-wider mb-3">
             Team Members · {members.length}
           </p>
           {members.map((m) => {
@@ -216,7 +216,7 @@ function ManageMembersModal({ project, currentUserId, onClose, onUpdate }) {
             return (
               <div
                 key={m.user._id}
-                className="flex items-center gap-3 p-3 rounded-xl bg-[#070b14] border border-[#1a2844]"
+                className="flex items-center gap-3 p-3 rounded-xl bg-[#f8f9fa] border border-[#dfe1e6]"
               >
                 <div className="w-10 h-10 rounded-full bg-linear-to-br from-indigo-500 to-violet-600 text-white font-bold text-sm
                   flex items-center justify-center shrink-0">
@@ -224,19 +224,19 @@ function ManageMembersModal({ project, currentUserId, onClose, onUpdate }) {
                 </div>
 
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm font-medium text-white truncate">
+                  <p className="text-sm font-medium text-[#172b4d] truncate">
                     {m.user.name}
                     {isCurrentUser && (
-                      <span className="ml-1.5 text-xs text-[#48617a] font-normal">(you)</span>
+                      <span className="ml-1.5 text-xs text-[#8590a2] font-normal">(you)</span>
                     )}
                   </p>
-                  <p className="text-xs text-[#8899bb] truncate">{m.user.email}</p>
+                  <p className="text-xs text-[#44546f] truncate">{m.user.email}</p>
                 </div>
 
                 <span className={`shrink-0 text-xs font-semibold px-2.5 py-1 rounded-full capitalize
                   ${m.role === 'admin'
-                    ? 'bg-indigo-500/15 text-indigo-300 ring-1 ring-indigo-500/25'
-                    : 'bg-slate-500/10 text-slate-400 ring-1 ring-slate-500/20'
+                    ? 'bg-indigo-50 text-indigo-600 ring-1 ring-indigo-200'
+                    : 'bg-slate-100 text-slate-500 ring-1 ring-slate-200'
                   }`}>
                   {m.role}
                 </span>
@@ -245,7 +245,7 @@ function ManageMembersModal({ project, currentUserId, onClose, onUpdate }) {
                   <button
                     onClick={() => handleRemove(m.user._id)}
                     disabled={isRemoving}
-                    className="p-1.5 text-[#8899bb] hover:text-red-400 hover:bg-red-500/10 rounded-lg transition-all shrink-0"
+                    className="p-1.5 text-[#44546f] hover:text-red-500 hover:bg-red-50 rounded-lg transition-all shrink-0"
                     title="Remove member"
                   >
                     {isRemoving
@@ -259,22 +259,22 @@ function ManageMembersModal({ project, currentUserId, onClose, onUpdate }) {
         </div>
 
         {/* Add member */}
-        <div className="pt-4 border-t border-[#1a2844]">
-          <p className="text-xs font-semibold text-[#48617a] uppercase tracking-wider mb-3">
+        <div className="pt-4 border-t border-[#dfe1e6]">
+          <p className="text-xs font-semibold text-[#8590a2] uppercase tracking-wider mb-3">
             Add Member by Email
           </p>
           <form onSubmit={handleAdd} className="flex gap-2">
             <div className="relative flex-1">
-              <FiUserPlus className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#3d5470] text-sm pointer-events-none" />
+              <FiUserPlus className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#a5adba] text-sm pointer-events-none" />
               <input
                 ref={emailRef}
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="colleague@example.com"
-                className="w-full bg-[#070b14] border border-[#1e3052] rounded-xl pl-10 pr-3 py-2.5 text-sm text-white
-                  placeholder-[#3d5470] focus:outline-none focus:border-indigo-500/70 focus:ring-2 focus:ring-indigo-500/15
-                  hover:border-[#253857] transition-all"
+                className="w-full bg-white border border-[#dfe1e6] rounded-xl pl-10 pr-3 py-2.5 text-sm text-[#172b4d]
+                  placeholder-[#a5adba] focus:outline-none focus:border-indigo-500/70 focus:ring-2 focus:ring-indigo-500/15
+                  hover:border-[#c1c4cc] transition-all"
               />
             </div>
             <button
@@ -304,9 +304,9 @@ function ProjectCard({ project, currentUserId, onManageMembers, navigate }) {
   const extraCount = Math.max(0, (project.members?.length || 0) - 4);
 
   return (
-    <div className="group relative bg-[#0d1525] border border-[#1e3052] rounded-2xl
+    <div className="group relative bg-white border border-[#dfe1e6] rounded-2xl
       hover:border-indigo-500/50 hover:shadow-2xl hover:shadow-indigo-500/10 hover:-translate-y-1
-      transition-all duration-300 flex flex-col ring-1 ring-white/3">
+      transition-all duration-300 flex flex-col ring-1 ring-black/5">
 
       {/* Hover top gradient line */}
       <div className="absolute inset-x-0 top-0 h-0.5 rounded-t-2xl bg-linear-to-r from-transparent via-indigo-500/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -319,22 +319,22 @@ function ProjectCard({ project, currentUserId, onManageMembers, navigate }) {
               border border-indigo-500/20 flex items-center justify-center">
               <FiFolder className="text-indigo-400 text-lg" />
             </div>
-            <h2 className="font-bold text-white text-base leading-snug truncate">
+            <h2 className="font-bold text-[#172b4d] text-base leading-snug truncate">
               {project.name}
             </h2>
           </div>
           <span className={`shrink-0 text-xs font-semibold px-2.5 py-1 rounded-full capitalize
             ${isAdmin
-              ? 'bg-indigo-500/15 text-indigo-300 ring-1 ring-indigo-500/25'
-              : 'bg-slate-500/10 text-slate-400 ring-1 ring-slate-500/20'
+              ? 'bg-indigo-50 text-indigo-600 ring-1 ring-indigo-200'
+              : 'bg-slate-100 text-slate-500 ring-1 ring-slate-200'
             }`}>
             {role}
           </span>
         </div>
 
         {/* Description */}
-        <p className="text-[#8899bb] text-sm leading-relaxed line-clamp-2 mb-5 min-h-10 flex-1">
-          {project.description || <span className="italic text-[#48617a]">No description</span>}
+        <p className="text-[#44546f] text-sm leading-relaxed line-clamp-2 mb-5 min-h-10 flex-1">
+          {project.description || <span className="italic text-[#8590a2]">No description</span>}
         </p>
 
         {/* Member avatar stack */}
@@ -345,19 +345,19 @@ function ProjectCard({ project, currentUserId, onManageMembers, navigate }) {
                 key={m.user?._id}
                 title={m.user?.name}
                 className="w-7 h-7 rounded-full bg-linear-to-br from-indigo-500 to-violet-600 text-white text-xs font-bold
-                  flex items-center justify-center border-2 border-[#0d1525] ring-0"
+                  flex items-center justify-center border-2 border-white ring-0"
               >
                 {initials(m.user?.name)}
               </div>
             ))}
             {extraCount > 0 && (
-              <div className="w-7 h-7 rounded-full bg-[#142038] text-[#8899bb] text-xs font-bold
-                flex items-center justify-center border-2 border-[#0d1525]">
+              <div className="w-7 h-7 rounded-full bg-[#ebecf0] text-[#44546f] text-xs font-bold
+                flex items-center justify-center border-2 border-white">
                 +{extraCount}
               </div>
             )}
           </div>
-          <span className="text-xs text-[#48617a]">
+          <span className="text-xs text-[#8590a2]">
             {project.members?.length ?? 0} member{project.members?.length !== 1 ? 's' : ''}
           </span>
         </div>
@@ -376,8 +376,8 @@ function ProjectCard({ project, currentUserId, onManageMembers, navigate }) {
             <button
               onClick={() => navigate(`/dashboard/${project._id}`)}
               className="flex-1 flex items-center justify-center gap-1.5 text-sm font-medium
-                bg-[#142038] hover:bg-[#1a2844] text-[#8899bb] hover:text-white px-3 py-2.5 rounded-xl
-                border border-[#1a2844] hover:border-[#253857] transition-all"
+                bg-[#f1f2f4] hover:bg-[#ebecf0] text-[#44546f] hover:text-[#172b4d] px-3 py-2.5 rounded-xl
+                border border-[#dfe1e6] hover:border-[#c1c4cc] transition-all"
             >
               <FiBarChart2 className="text-sm" /> Dashboard
             </button>
@@ -387,8 +387,8 @@ function ProjectCard({ project, currentUserId, onManageMembers, navigate }) {
             <button
               onClick={() => onManageMembers(project)}
               className="w-full flex items-center justify-center gap-1.5 text-sm font-medium
-                border border-[#1a2844] hover:border-[#253857] text-[#8899bb] hover:text-white
-                hover:bg-[#142038] py-2.5 rounded-xl transition-all"
+                border border-[#dfe1e6] hover:border-[#c1c4cc] text-[#44546f] hover:text-[#172b4d]
+                hover:bg-[#ebecf0] py-2.5 rounded-xl transition-all"
             >
               <FiSettings className="text-sm" /> Manage Members
             </button>
@@ -439,51 +439,62 @@ export default function Projects() {
   ).length;
 
   return (
-    <div className="min-h-screen bg-[#070b14]">
+    <div className="min-h-screen bg-[#f1f2f4]">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
 
         {/* Header */}
         <div className="flex items-center justify-between mb-8">
           <div>
-            <h1 className="text-3xl font-bold text-white">My Projects</h1>
-            <p className="text-[#8899bb] text-sm mt-1.5">
+            <h1 className="text-3xl font-bold text-[#172b4d]">My Projects</h1>
+            <p className="text-[#44546f] text-sm mt-1.5">
               {loading
                 ? 'Loading…'
                 : `${projects.length} project${projects.length !== 1 ? 's' : ''} · ${adminCount} as admin`}
             </p>
           </div>
-          <button
-            onClick={() => setShowCreateModal(true)}
-            className="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-500 text-white
-              px-4 py-2.5 rounded-xl text-sm font-semibold transition-all
-              shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/40 hover:-translate-y-px"
-          >
-            <FiPlus /> Create Project
-          </button>
+          {user?.role === 'admin' && (
+            <button
+              onClick={() => setShowCreateModal(true)}
+              className="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-500 text-white
+                px-4 py-2.5 rounded-xl text-sm font-semibold transition-all
+                shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/40 hover:-translate-y-px"
+            >
+              <FiPlus /> Create Project
+            </button>
+          )}
         </div>
 
         {/* Loading */}
         {loading ? (
-          <div className="flex flex-col items-center justify-center py-32 gap-3 text-[#8899bb]">
+          <div className="flex flex-col items-center justify-center py-32 gap-3 text-[#44546f]">
             <Spinner className="h-8 w-8 text-indigo-400" />
             <p>Loading your projects…</p>
           </div>
         ) : projects.length === 0 ? (
           /* Empty state */
           <div className="flex flex-col items-center justify-center py-32 text-center">
-            <div className="w-20 h-20 rounded-2xl bg-[#0d1525] border border-[#1a2844] flex items-center justify-center mb-5">
-              <FiFolder className="text-[#48617a] text-3xl" />
+            <div className="w-20 h-20 rounded-2xl bg-white border border-[#dfe1e6] flex items-center justify-center mb-5">
+              <FiFolder className="text-[#8590a2] text-3xl" />
             </div>
-            <h2 className="text-xl font-semibold text-white mb-2">No projects yet</h2>
-            <p className="text-[#8899bb] text-sm mb-8 max-w-xs">Create your first project to start collaborating with your team</p>
-            <button
-              onClick={() => setShowCreateModal(true)}
-              className="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-500 text-white
-                px-5 py-2.5 rounded-xl text-sm font-semibold transition-all
-                shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/40 hover:-translate-y-px"
-            >
-              <FiPlus /> Create Project
-            </button>
+            {user?.role === 'admin' ? (
+              <>
+                <h2 className="text-xl font-semibold text-[#172b4d] mb-2">No projects yet</h2>
+                <p className="text-[#44546f] text-sm mb-8 max-w-xs">Create your first project to start collaborating with your team</p>
+                <button
+                  onClick={() => setShowCreateModal(true)}
+                  className="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-500 text-white
+                    px-5 py-2.5 rounded-xl text-sm font-semibold transition-all
+                    shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/40 hover:-translate-y-px"
+                >
+                  <FiPlus /> Create Project
+                </button>
+              </>
+            ) : (
+              <>
+                <h2 className="text-xl font-semibold text-[#172b4d] mb-2">No projects assigned</h2>
+                <p className="text-[#44546f] text-sm max-w-xs">You haven&apos;t been added to any projects yet. Ask an admin to add you.</p>
+              </>
+            )}
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">

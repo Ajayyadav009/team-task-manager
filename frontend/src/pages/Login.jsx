@@ -40,10 +40,10 @@ export default function Login() {
   };
 
   const inputCls =
-    'w-full bg-[#070b14] border border-[#1e3052] rounded-xl px-4 py-3.5 text-sm text-white placeholder-[#3d5470] focus:outline-none focus:border-indigo-500/70 focus:ring-2 focus:ring-indigo-500/15 hover:border-[#253857] transition-all';
+    'w-full bg-white border border-[#dfe1e6] rounded-xl px-4 py-3.5 text-sm text-[#172b4d] placeholder-[#a5adba] focus:outline-none focus:border-indigo-500/70 focus:ring-2 focus:ring-indigo-500/15 hover:border-[#c1c4cc] transition-all';
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4 bg-[#070b14] relative overflow-hidden">
+    <div className="min-h-screen flex items-center justify-center px-4 bg-[#f1f2f4] relative overflow-hidden">
 
       {/* Ambient blobs */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-indigo-600/10 rounded-full blur-3xl pointer-events-none" />
@@ -56,22 +56,22 @@ export default function Login() {
           <div className="w-14 h-14 rounded-2xl bg-linear-to-br from-indigo-500 to-violet-600 flex items-center justify-center shadow-2xl shadow-indigo-500/40 mb-5">
             <FiZap className="text-white text-2xl" />
           </div>
-          <h1 className="text-2xl font-bold text-white tracking-tight">TaskManager</h1>
-          <p className="text-[#8899bb] text-sm mt-1.5">Sign in to your workspace</p>
+          <h1 className="text-2xl font-bold text-[#172b4d] tracking-tight">TaskManager</h1>
+          <p className="text-[#44546f] text-sm mt-1.5">Sign in to your workspace</p>
         </div>
 
         {/* Card */}
-        <div className="bg-[#0d1525] border border-[#1e3052] rounded-2xl p-8 shadow-2xl shadow-black/60 ring-1 ring-white/3">
+        <div className="bg-white border border-[#dfe1e6] rounded-2xl p-8 shadow-2xl shadow-black/10 ring-1 ring-black/5">
 
-          <h2 className="text-xl font-semibold text-white mb-6">Welcome back</h2>
+          <h2 className="text-xl font-semibold text-[#172b4d] mb-6">Welcome back</h2>
 
           <form onSubmit={handleSubmit} className="space-y-5">
 
             {/* Email */}
             <div className="space-y-1.5">
-              <label className="block text-sm font-medium text-[#8899bb]">Email address</label>
+              <label className="block text-sm font-medium text-[#44546f]">Email address</label>
               <div className="relative">
-                <FiMail className="absolute left-4 top-1/2 -translate-y-1/2 text-[#3d5470] text-sm pointer-events-none" />
+                <FiMail className="absolute left-4 top-1/2 -translate-y-1/2 text-[#a5adba] text-sm pointer-events-none" />
                 <input
                   type="email"
                   name="email"
@@ -86,9 +86,9 @@ export default function Login() {
 
             {/* Password */}
             <div className="space-y-1.5">
-              <label className="block text-sm font-medium text-[#8899bb]">Password</label>
+              <label className="block text-sm font-medium text-[#44546f]">Password</label>
               <div className="relative">
-                <FiLock className="absolute left-4 top-1/2 -translate-y-1/2 text-[#3d5470] text-sm pointer-events-none" />
+                <FiLock className="absolute left-4 top-1/2 -translate-y-1/2 text-[#a5adba] text-sm pointer-events-none" />
                 <input
                   type={showPassword ? 'text' : 'password'}
                   name="password"
@@ -101,7 +101,7 @@ export default function Login() {
                 <button
                   type="button"
                   onClick={() => setShowPassword((v) => !v)}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 text-[#3d5470] hover:text-[#8899bb] transition-colors"
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-[#a5adba] hover:text-[#44546f] transition-colors"
                   tabIndex={-1}
                 >
                   {showPassword ? <FiEyeOff className="text-base" /> : <FiEye className="text-base" />}
@@ -132,10 +132,10 @@ export default function Login() {
             </button>
           </form>
 
-          <div className="mt-6 pt-6 border-t border-[#1a2844] text-center">
-            <p className="text-sm text-[#8899bb]">
+          <div className="mt-6 pt-6 border-t border-[#dfe1e6] text-center">
+            <p className="text-sm text-[#44546f]">
               Don&apos;t have an account?{' '}
-              <Link to="/register" className="text-indigo-400 font-medium hover:text-indigo-300 transition-colors">
+              <Link to="/register" className="text-indigo-600 font-medium hover:text-indigo-500 transition-colors">
                 Create one
               </Link>
             </p>

@@ -2,7 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const Project = require('../models/Project');
 const User = require('../models/User');
-const { protect } = require('../middleware/auth');
+const { protect, isAdmin } = require('../middleware/auth');
 
 const router = express.Router();
 
@@ -21,8 +21,8 @@ const requireProjectAdmin = async (projectId, userId) => {
 
 const isValidId = (id) => mongoose.Types.ObjectId.isValid(id);
 
-// POST /api/projects — create project; creator is added as project admin
-router.post('/', protect, async (req, res) => {
+// POST /api/projects — create project; only system admins can create (creator becomes project admin)
+router.post('/', protect, isAdmin, async (req, res) => {
   const { name, description } = req.body;
   if (!name || !name.trim()) {
     return res.status(400).json({ message: 'Project name is required' });

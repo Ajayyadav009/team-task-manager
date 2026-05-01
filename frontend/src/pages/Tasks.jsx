@@ -23,14 +23,14 @@ const STATUS_LABELS = { todo: 'To Do', inprogress: 'In Progress', done: 'Done' }
 
 const PRIORITY_BAR   = { low: 'bg-emerald-500', medium: 'bg-amber-400', high: 'bg-red-500' };
 const PRIORITY_BADGE = {
-  low:    'bg-emerald-500/15 text-emerald-400 ring-1 ring-emerald-500/20',
-  medium: 'bg-amber-500/15 text-amber-400 ring-1 ring-amber-500/20',
-  high:   'bg-red-500/15 text-red-400 ring-1 ring-red-500/20',
+  low:    'bg-emerald-50 text-emerald-700 ring-1 ring-emerald-200',
+  medium: 'bg-amber-50 text-amber-700 ring-1 ring-amber-200',
+  high:   'bg-red-50 text-red-600 ring-1 ring-red-200',
 };
 const STATUS_BADGE = {
-  todo:       'bg-slate-500/10 text-slate-400 ring-1 ring-slate-500/15',
-  inprogress: 'bg-blue-500/15 text-blue-400 ring-1 ring-blue-500/20',
-  done:       'bg-emerald-500/15 text-emerald-400 ring-1 ring-emerald-500/20',
+  todo:       'bg-slate-100 text-slate-600 ring-1 ring-slate-200',
+  inprogress: 'bg-blue-50 text-blue-600 ring-1 ring-blue-200',
+  done:       'bg-emerald-50 text-emerald-700 ring-1 ring-emerald-200',
 };
 
 const TABS = [
@@ -53,7 +53,7 @@ function initials(name = '') {
 
 // ─── Shared dark input class ──────────────────────────────────────────────────
 const inputCls =
-  'w-full bg-[#070b14] border border-[#1e3052] rounded-xl px-4 py-3.5 text-sm text-white placeholder-[#3d5470] focus:outline-none focus:border-indigo-500/70 focus:ring-2 focus:ring-indigo-500/15 hover:border-[#253857] transition-all';
+  'w-full bg-white border border-[#dfe1e6] rounded-xl px-4 py-3.5 text-sm text-[#172b4d] placeholder-[#a5adba] focus:outline-none focus:border-indigo-500/70 focus:ring-2 focus:ring-indigo-500/15 hover:border-[#c1c4cc] transition-all';
 
 // ─── Spinner ──────────────────────────────────────────────────────────────────
 function Spinner({ className = 'h-4 w-4' }) {
@@ -79,7 +79,7 @@ function Modal({ onClose, children, maxWidth = 'max-w-lg' }) {
       onClick={(e) => { if (e.target === backdropRef.current) onClose(); }}
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm px-4 py-8"
     >
-      <div className={`bg-[#0d1525] border border-[#1a2844] rounded-2xl shadow-2xl w-full ${maxWidth} max-h-[90vh] overflow-y-auto`}>
+      <div className={`bg-white border border-[#dfe1e6] rounded-2xl shadow-2xl w-full ${maxWidth} max-h-[90vh] overflow-y-auto`}>
         {children}
       </div>
     </div>
@@ -91,12 +91,12 @@ function ModalHeader({ title, subtitle, onClose }) {
   return (
     <div className="flex items-center justify-between mb-5 p-6 pb-0">
       <div>
-        <h2 className="text-lg font-semibold text-white">{title}</h2>
-        {subtitle && <p className="text-sm text-[#8899bb] mt-0.5 truncate max-w-64">{subtitle}</p>}
+        <h2 className="text-lg font-semibold text-[#172b4d]">{title}</h2>
+        {subtitle && <p className="text-sm text-[#44546f] mt-0.5 truncate max-w-64">{subtitle}</p>}
       </div>
       <button
         onClick={onClose}
-        className="p-2 rounded-xl text-[#8899bb] hover:text-white hover:bg-[#142038] transition-all"
+        className="p-2 rounded-xl text-[#44546f] hover:text-[#172b4d] hover:bg-[#ebecf0] transition-all"
       >
         <FiX />
       </button>
@@ -142,8 +142,8 @@ function CreateTaskModal({ projectId, members, onClose, onCreated }) {
       <ModalHeader title="Add New Task" subtitle="Fill in the details below" onClose={onClose} />
       <form onSubmit={handleSubmit} className="p-6 pt-4 space-y-4">
         <div className="space-y-1.5">
-          <label className="block text-sm font-medium text-[#8899bb]">
-            Title <span className="text-red-400">*</span>
+          <label className="block text-sm font-medium text-[#44546f]">
+            Title <span className="text-red-500">*</span>
           </label>
           <input
             ref={titleRef}
@@ -157,32 +157,32 @@ function CreateTaskModal({ projectId, members, onClose, onCreated }) {
           />
         </div>
         <div className="space-y-1.5">
-          <label className="block text-sm font-medium text-[#8899bb]">
-            Description <span className="text-[#48617a] font-normal">(optional)</span>
+          <label className="block text-sm font-medium text-[#44546f]">
+            Description <span className="text-[#8590a2] font-normal">(optional)</span>
           </label>
           <textarea name="description" value={form.description} onChange={onChange}
             placeholder="Describe the task…" rows={3} className={`${inputCls} resize-none`} />
         </div>
         <div className="grid grid-cols-2 gap-3">
           <div className="space-y-1.5">
-            <label className="block text-sm font-medium text-[#8899bb]">Priority</label>
+            <label className="block text-sm font-medium text-[#44546f]">Priority</label>
             <select name="priority" value={form.priority} onChange={onChange}
-              className={`${inputCls} bg-[#070b14] cursor-pointer`}>
-              {PRIORITIES.map((p) => <option key={p} value={p} className="bg-[#0d1525]">{p.charAt(0).toUpperCase() + p.slice(1)}</option>)}
+              className={`${inputCls} bg-white cursor-pointer`}>
+              {PRIORITIES.map((p) => <option key={p} value={p} className="bg-white text-[#172b4d]">{p.charAt(0).toUpperCase() + p.slice(1)}</option>)}
             </select>
           </div>
           <div className="space-y-1.5">
-            <label className="block text-sm font-medium text-[#8899bb]">Due Date</label>
+            <label className="block text-sm font-medium text-[#44546f]">Due Date</label>
             <input type="date" name="dueDate" value={form.dueDate} onChange={onChange}
-              className={`${inputCls} bg-[#070b14]`} />
+              className={`${inputCls} bg-white`} />
           </div>
         </div>
         <div className="space-y-1.5">
-          <label className="block text-sm font-medium text-[#8899bb]">Assign To</label>
+          <label className="block text-sm font-medium text-[#44546f]">Assign To</label>
           <select name="assignedTo" value={form.assignedTo} onChange={onChange}
-            className={`${inputCls} bg-[#070b14] cursor-pointer`}>
-            <option value="" className="bg-[#0d1525]">Unassigned</option>
-            {members.map((m) => <option key={m.user._id} value={m.user._id} className="bg-[#0d1525]">{m.user.name}</option>)}
+            className={`${inputCls} bg-white cursor-pointer`}>
+            <option value="" className="bg-white text-[#172b4d]">Unassigned</option>
+            {members.map((m) => <option key={m.user._id} value={m.user._id} className="bg-white text-[#172b4d]">{m.user.name}</option>)}
           </select>
         </div>
 
@@ -195,7 +195,7 @@ function CreateTaskModal({ projectId, members, onClose, onCreated }) {
             {submitting ? <><Spinner /> Creating…</> : <><FiPlus className="text-sm" /> Add Task</>}
           </button>
           <button type="button" onClick={onClose}
-            className="px-5 py-3 rounded-xl text-sm font-medium bg-[#142038] hover:bg-[#1a2844] text-[#8899bb] hover:text-white border border-[#1a2844] hover:border-[#253857] transition-all">
+            className="px-5 py-3 rounded-xl text-sm font-medium bg-[#f1f2f4] hover:bg-[#ebecf0] text-[#44546f] hover:text-[#172b4d] border border-[#dfe1e6] hover:border-[#c1c4cc] transition-all">
             Cancel
           </button>
         </div>
@@ -247,29 +247,29 @@ function EditTaskModal({ task, members, onClose, onUpdated }) {
           <input type="text" name="title" value={form.title} onChange={onChange} className={inputCls} autoFocus />
         </div>
         <div className="space-y-1.5">
-          <label className="block text-sm font-medium text-[#8899bb]">Description</label>
+          <label className="block text-sm font-medium text-[#44546f]">Description</label>
           <textarea name="description" value={form.description} onChange={onChange} rows={3} className={`${inputCls} resize-none`} />
         </div>
         <div className="grid grid-cols-2 gap-3">
           <div className="space-y-1.5">
-            <label className="block text-sm font-medium text-[#8899bb]">Priority</label>
+            <label className="block text-sm font-medium text-[#44546f]">Priority</label>
             <select name="priority" value={form.priority} onChange={onChange}
-              className={`${inputCls} bg-[#070b14] cursor-pointer`}>
-              {PRIORITIES.map((p) => <option key={p} value={p} className="bg-[#0d1525]">{p.charAt(0).toUpperCase() + p.slice(1)}</option>)}
+              className={`${inputCls} bg-white cursor-pointer`}>
+              {PRIORITIES.map((p) => <option key={p} value={p} className="bg-white text-[#172b4d]">{p.charAt(0).toUpperCase() + p.slice(1)}</option>)}
             </select>
           </div>
           <div className="space-y-1.5">
-            <label className="block text-sm font-medium text-[#8899bb]">Due Date</label>
+            <label className="block text-sm font-medium text-[#44546f]">Due Date</label>
             <input type="date" name="dueDate" value={form.dueDate} onChange={onChange}
-              className={`${inputCls} bg-[#070b14]`} />
+              className={`${inputCls} bg-white`} />
           </div>
         </div>
         <div className="space-y-1.5">
-          <label className="block text-sm font-medium text-[#8899bb]">Assign To</label>
+          <label className="block text-sm font-medium text-[#44546f]">Assign To</label>
           <select name="assignedTo" value={form.assignedTo} onChange={onChange}
-            className={`${inputCls} bg-[#070b14] cursor-pointer`}>
-            <option value="" className="bg-[#0d1525]">Unassigned</option>
-            {members.map((m) => <option key={m.user._id} value={m.user._id} className="bg-[#0d1525]">{m.user.name}</option>)}
+            className={`${inputCls} bg-white cursor-pointer`}>
+            <option value="" className="bg-white text-[#172b4d]">Unassigned</option>
+            {members.map((m) => <option key={m.user._id} value={m.user._id} className="bg-white text-[#172b4d]">{m.user.name}</option>)}
           </select>
         </div>
 
@@ -282,7 +282,7 @@ function EditTaskModal({ task, members, onClose, onUpdated }) {
             {submitting ? <><Spinner /> Saving…</> : 'Save Changes'}
           </button>
           <button type="button" onClick={onClose}
-            className="px-5 py-3 rounded-xl text-sm font-medium bg-[#142038] hover:bg-[#1a2844] text-[#8899bb] hover:text-white border border-[#1a2844] hover:border-[#253857] transition-all">
+            className="px-5 py-3 rounded-xl text-sm font-medium bg-[#f1f2f4] hover:bg-[#ebecf0] text-[#44546f] hover:text-[#172b4d] border border-[#dfe1e6] hover:border-[#c1c4cc] transition-all">
             Cancel
           </button>
         </div>
@@ -299,13 +299,13 @@ function DeleteConfirmModal({ task, onClose, onConfirm, deleting }) {
         <div className="w-14 h-14 rounded-2xl bg-red-500/15 border border-red-500/25 flex items-center justify-center mx-auto mb-4">
           <FiTrash2 className="text-red-400 text-xl" />
         </div>
-        <h2 className="text-lg font-semibold text-white mb-1">Delete Task?</h2>
-        <p className="text-sm text-[#8899bb] mb-6">
-          <span className="font-medium text-white">&ldquo;{task.title}&rdquo;</span> will be permanently deleted. This cannot be undone.
+        <h2 className="text-lg font-semibold text-[#172b4d] mb-1">Delete Task?</h2>
+        <p className="text-sm text-[#44546f] mb-6">
+          <span className="font-medium text-[#172b4d]">&ldquo;{task.title}&rdquo;</span> will be permanently deleted. This cannot be undone.
         </p>
         <div className="flex gap-3">
           <button onClick={onClose}
-            className="flex-1 px-4 py-2.5 rounded-xl text-sm font-medium bg-[#142038] hover:bg-[#1a2844] text-[#8899bb] hover:text-white border border-[#1a2844] hover:border-[#253857] transition-all">
+            className="flex-1 px-4 py-2.5 rounded-xl text-sm font-medium bg-[#f1f2f4] hover:bg-[#ebecf0] text-[#44546f] hover:text-[#172b4d] border border-[#dfe1e6] hover:border-[#c1c4cc] transition-all">
             Cancel
           </button>
           <button onClick={onConfirm} disabled={deleting}
@@ -334,12 +334,12 @@ function TaskCard({ task, isAdmin, currentUserId, onStatusChange, onEdit, onDele
   };
 
   return (
-    <div className={`group relative bg-[#0d1525] border rounded-2xl overflow-hidden
+    <div className={`group relative bg-white border rounded-2xl overflow-hidden
       hover:shadow-xl hover:shadow-indigo-500/5 hover:-translate-y-0.5
       transition-all duration-200
       ${isOverdue
-        ? 'border-red-500/30 bg-red-500/[0.02] hover:border-red-500/50'
-        : 'border-[#1a2844] hover:border-indigo-500/30'
+        ? 'border-red-300 bg-red-50/50 hover:border-red-400'
+        : 'border-[#dfe1e6] hover:border-indigo-300'
       }`}>
 
       {/* Priority stripe */}
@@ -349,21 +349,21 @@ function TaskCard({ task, isAdmin, currentUserId, onStatusChange, onEdit, onDele
         {/* Title row + admin actions */}
         <div className="flex items-start justify-between gap-2 mb-1.5">
           <p className={`font-bold text-lg leading-snug flex-1 min-w-0
-            ${task.status === 'done' ? 'line-through text-[#48617a]' : 'text-white'}`}>
+            ${task.status === 'done' ? 'line-through text-[#8590a2]' : 'text-[#172b4d]'}`}>
             {task.title}
           </p>
           {isAdmin && (
             <div className="flex items-center gap-1 shrink-0 opacity-0 group-hover:opacity-100 transition-opacity">
               <button
                 onClick={() => onEdit(task)}
-                className="p-1.5 text-[#8899bb] hover:text-indigo-400 hover:bg-indigo-500/10 rounded-lg transition-all"
+                className="p-1.5 text-[#44546f] hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-all"
                 title="Edit task"
               >
                 <FiEdit3 className="text-sm" />
               </button>
               <button
                 onClick={() => onDelete(task)}
-                className="p-1.5 text-[#8899bb] hover:text-red-400 hover:bg-red-500/10 rounded-lg transition-all"
+                className="p-1.5 text-[#44546f] hover:text-red-500 hover:bg-red-50 rounded-lg transition-all"
                 title="Delete task"
               >
                 <FiTrash2 className="text-sm" />
@@ -373,8 +373,8 @@ function TaskCard({ task, isAdmin, currentUserId, onStatusChange, onEdit, onDele
         </div>
 
         {/* Description */}
-        <p className="text-sm text-[#8899bb] line-clamp-2 mt-1.5 mb-4 leading-relaxed min-h-[2.5rem]">
-          {task.description || <span className="text-[#48617a] italic">No description</span>}
+        <p className="text-sm text-[#44546f] line-clamp-2 mt-1.5 mb-4 leading-relaxed min-h-[2.5rem]">
+          {task.description || <span className="text-[#8590a2] italic">No description</span>}
         </p>
 
         {/* Bottom meta row */}
@@ -399,7 +399,7 @@ function TaskCard({ task, isAdmin, currentUserId, onStatusChange, onEdit, onDele
                   bg-transparent focus:outline-none focus:ring-1 focus:ring-indigo-400/50 ${STATUS_BADGE[task.status]}`}
               >
                 {STATUSES.map((s) => (
-                  <option key={s} value={s} className="bg-[#0d1525] text-white">{STATUS_LABELS[s]}</option>
+                  <option key={s} value={s} className="bg-white text-[#172b4d]">{STATUS_LABELS[s]}</option>
                 ))}
               </select>
             )
@@ -411,7 +411,7 @@ function TaskCard({ task, isAdmin, currentUserId, onStatusChange, onEdit, onDele
 
           {/* Overdue badge */}
           {isOverdue && (
-            <span className="flex items-center gap-1 text-xs font-medium px-2.5 py-1 rounded-full bg-red-500/15 text-red-400 ring-1 ring-red-500/20">
+            <span className="flex items-center gap-1 text-xs font-medium px-2.5 py-1 rounded-full bg-red-50 text-red-600 ring-1 ring-red-200">
               <FiAlertCircle className="text-xs" /> Overdue
             </span>
           )}
@@ -425,17 +425,17 @@ function TaskCard({ task, isAdmin, currentUserId, onStatusChange, onEdit, onDele
               <div className="w-6 h-6 rounded-full bg-linear-to-br from-indigo-500 to-violet-600 text-white text-xs font-bold flex items-center justify-center">
                 {initials(task.assignedTo.name)}
               </div>
-              <span className="text-xs text-[#8899bb]">{task.assignedTo.name}</span>
+              <span className="text-xs text-[#44546f]">{task.assignedTo.name}</span>
             </div>
           ) : (
-            <span className="flex items-center gap-1 text-xs text-[#48617a]">
+            <span className="flex items-center gap-1 text-xs text-[#8590a2]">
               <FiUser className="text-xs" /> Unassigned
             </span>
           )}
 
           {/* Due date */}
           {task.dueDate && (
-            <span className={`flex items-center gap-1 text-xs font-medium ${isOverdue ? 'text-red-400' : 'text-[#48617a]'}`}>
+            <span className={`flex items-center gap-1 text-xs font-medium ${isOverdue ? 'text-red-500' : 'text-[#8590a2]'}`}>
               <FiCalendar className="text-xs" /> {fmtDate(task.dueDate)}
             </span>
           )}
@@ -517,7 +517,7 @@ export default function Tasks() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#070b14] flex flex-col items-center justify-center gap-3 text-[#8899bb]">
+      <div className="min-h-screen bg-[#f1f2f4] flex flex-col items-center justify-center gap-3 text-[#44546f]">
         <Spinner className="h-8 w-8 text-indigo-400" />
         <p>Loading tasks…</p>
       </div>
@@ -525,22 +525,22 @@ export default function Tasks() {
   }
 
   return (
-    <div className="min-h-screen bg-[#070b14]">
+    <div className="min-h-screen bg-[#f1f2f4]">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
 
         {/* Header */}
         <div className="mb-7">
           <button
             onClick={() => navigate('/projects')}
-            className="flex items-center gap-1.5 text-sm text-[#8899bb] hover:text-indigo-400 transition-colors mb-5"
+            className="flex items-center gap-1.5 text-sm text-[#44546f] hover:text-indigo-600 transition-colors mb-5"
           >
             <FiArrowLeft /> Back to Projects
           </button>
 
           <div className="flex items-start justify-between gap-4">
             <div className="min-w-0">
-              <h1 className="text-3xl font-bold text-white truncate">{project?.name}</h1>
-              <p className="text-[#8899bb] text-sm mt-1.5">
+              <h1 className="text-3xl font-bold text-[#172b4d] truncate">{project?.name}</h1>
+              <p className="text-[#44546f] text-sm mt-1.5">
                 {tasks.length} task{tasks.length !== 1 ? 's' : ''}
                 {!isProjectAdmin && ' · showing your assigned tasks'}
               </p>
@@ -570,12 +570,12 @@ export default function Tasks() {
                 className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-all
                   ${isActive
                     ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-500/20'
-                    : 'bg-[#0d1525] border border-[#1a2844] text-[#8899bb] hover:text-white hover:border-[#253857]'
+                    : 'bg-white border border-[#dfe1e6] text-[#44546f] hover:text-[#172b4d] hover:border-[#c1c4cc]'
                   }`}
               >
                 {tab.label}
                 <span className={`text-xs px-1.5 py-0.5 rounded-full font-semibold
-                  ${isActive ? 'bg-white/20 text-white' : 'bg-[#142038] text-[#8899bb]'}`}>
+                  ${isActive ? 'bg-white/20 text-white' : 'bg-[#ebecf0] text-[#44546f]'}`}>
                   {count}
                 </span>
               </button>
@@ -586,13 +586,13 @@ export default function Tasks() {
         {/* Task list */}
         {filtered.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-32 text-center">
-            <div className="w-16 h-16 rounded-2xl bg-[#0d1525] border border-[#1a2844] flex items-center justify-center mb-4">
-              <FiClipboard className="text-[#48617a] text-2xl" />
+            <div className="w-16 h-16 rounded-2xl bg-white border border-[#dfe1e6] flex items-center justify-center mb-4">
+              <FiClipboard className="text-[#8590a2] text-2xl" />
             </div>
-            <h2 className="text-base font-semibold text-white mb-1">
+            <h2 className="text-base font-semibold text-[#172b4d] mb-1">
               {activeTab === 'all' ? 'No tasks yet' : `No ${STATUS_LABELS[activeTab]} tasks`}
             </h2>
-            <p className="text-[#8899bb] text-sm">
+            <p className="text-[#44546f] text-sm">
               {activeTab === 'all' && isProjectAdmin
                 ? 'Click "Add Task" to create the first one'
                 : 'Switch tabs or check back later'}
