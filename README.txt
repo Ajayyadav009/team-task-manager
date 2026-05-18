@@ -1,133 +1,390 @@
 # Team Task Manager
 
-A full-stack web app for managing projects and tasks across a team. Built with React on the frontend and Node/Express on the backend, with MongoDB as the database.
+A full-stack project and task management platform built for teams to collaborate efficiently. The application allows admins to create projects, assign tasks, manage team members, and monitor overall project progress, while members can track and update their assigned work.
+
+Built with React, Node.js, Express, and MongoDB.
 
 ---
 
-## What it does
+# Features
 
-You register an account as either an Admin or a Member. Admins create projects, add teammates to those projects, create tasks, and assign them to members. Members log in and see the projects they've been added to, then work through their assigned tasks.
+## Authentication & Authorization
+- Secure user registration and login
+- JWT-based authentication
+- Role-based access control (Admin / Member)
+- Password hashing using bcryptjs
 
-There's also a per-project dashboard that shows task completion stats, overdue items, and (if you're an admin) how each team member is progressing.
+## Project Management
+- Create and manage projects
+- Add or remove project members
+- Maintain project-specific access permissions
+
+## Task Management
+- Create, edit, delete, and assign tasks
+- Task status workflow:
+  - Todo
+  - In Progress
+  - Done
+- Due dates and overdue tracking
+
+## Dashboard & Analytics
+- Project-wise task statistics
+- Completion tracking
+- Overdue task monitoring
+- Team performance overview for admins
 
 ---
 
-## Tech stack
+# Tech Stack
 
-**Frontend**
-- React 18 with Vite
+## Frontend
+- React 18
+- Vite
 - Tailwind CSS v4
 - React Router v7
-- Axios for API calls
-- react-hot-toast for notifications
+- Axios
+- react-hot-toast
 
-**Backend**
-- Node.js + Express 5
-- MongoDB with Mongoose
-- JWT for auth (7-day expiry)
-- bcryptjs for password hashing
+## Backend
+- Node.js
+- Express.js 5
+- MongoDB + Mongoose
+- JWT Authentication
+- bcryptjs
 
 ---
 
-## Project structure
+# Folder Structure
 
-```
+```bash
 team-task-manager/
-├── frontend/          React app
-│   └── src/
-│       ├── pages/     Login, Register, Projects, Tasks, Dashboard
-│       ├── components/  Navbar, PrivateRoute
-│       ├── context/   Auth context
-│       └── api/       Axios instance
-└── backend/
-    ├── routes/        auth, projects, tasks, dashboard
-    ├── models/        User, Project, Task
-    ├── middleware/    JWT protect, isAdmin
-    └── server.js
+├── frontend/
+│   ├── src/
+│   │   ├── api/
+│   │   ├── components/
+│   │   ├── context/
+│   │   ├── pages/
+│   │   └── main.jsx
+│   ├── package.json
+│   └── vite.config.js
+│
+├── backend/
+│   ├── middleware/
+│   ├── models/
+│   ├── routes/
+│   ├── server.js
+│   └── package.json
+│
+└── README.md
 ```
 
 ---
 
-## Getting started
+# Local Setup
 
-You'll need Node.js and a MongoDB connection (Atlas or local).
+## Prerequisites
 
-### Backend
+Make sure you have installed:
+
+- Node.js
+- npm
+- MongoDB Atlas account or local MongoDB server
+
+---
+
+# Backend Setup
+
+## 1. Navigate to backend folder
 
 ```bash
 cd backend
+```
+
+## 2. Install dependencies
+
+```bash
 npm install
 ```
 
-Create a `.env` file in the `backend` folder:
+## 3. Create `.env` file inside backend folder
 
-```
+```env
 PORT=5000
 MONGO_URI=your_mongodb_connection_string
-JWT_SECRET=pick_something_long_and_random
+JWT_SECRET=your_super_secret_key
 ```
 
-Then start the server:
+## 4. Start backend server
+
+### Development
 
 ```bash
-npm run dev      # with nodemon (recommended for dev)
-npm start        # production
-```
-
-The API will be running at `http://localhost:5000`.
-
-### Frontend
-
-```bash
-cd frontend
-npm install
 npm run dev
 ```
 
-Opens at `http://localhost:5173` by default. It proxies API requests to port 5000.
+### Production
+
+```bash
+npm start
+```
+
+Backend runs at:
+
+```bash
+http://localhost:5000
+```
 
 ---
 
-## Roles
+# Frontend Setup
 
-**Admin**
-- Create projects (only admins can do this)
-- Add and remove members from projects
-- Create, edit, and delete tasks
-- Assign tasks to members
-- View the full project dashboard
+## 1. Navigate to frontend folder
 
-**Member**
-- View projects they've been added to
-- See their assigned tasks
-- Update the status of their own tasks (todo → in progress → done)
-- View their personal task summary on the dashboard
+```bash
+cd frontend
+```
+
+## 2. Install dependencies
+
+```bash
+npm install
+```
+
+## 3. Create `.env` file inside frontend folder
+
+```env
+VITE_API_URL=http://localhost:5000
+```
+
+## 4. Start frontend
+
+```bash
+npm run dev
+```
+
+Frontend runs at:
+
+```bash
+http://localhost:5173
+```
 
 ---
 
-## API overview
+# User Roles
 
-| Method | Endpoint | Who |
-|--------|----------|-----|
+## Admin
+- Create projects
+- Add/remove members
+- Create and assign tasks
+- Edit or delete tasks
+- Access complete project dashboard
+- Monitor team performance
+
+## Member
+- View assigned projects
+- View assigned tasks
+- Update task status
+- Access personal dashboard stats
+
+---
+
+# API Endpoints
+
+| Method | Endpoint | Access |
+|--------|----------|--------|
 | POST | `/api/auth/register` | Public |
 | POST | `/api/auth/login` | Public |
-| GET | `/api/projects` | Any member |
-| POST | `/api/projects` | Admin only |
-| POST | `/api/projects/:id/members` | Project admin |
-| DELETE | `/api/projects/:id/members/:userId` | Project admin |
-| GET | `/api/tasks/project/:projectId` | Members (filtered by role) |
-| POST | `/api/tasks` | Project admin |
-| PATCH | `/api/tasks/:id` | Project admin |
-| PATCH | `/api/tasks/:id/status` | Assigned member or admin |
-| DELETE | `/api/tasks/:id` | Project admin |
-| GET | `/api/dashboard/:projectId` | Members (filtered by role) |
+| GET | `/api/projects` | Authenticated |
+| POST | `/api/projects` | Admin |
+| POST | `/api/projects/:id/members` | Project Admin |
+| DELETE | `/api/projects/:id/members/:userId` | Project Admin |
+| GET | `/api/tasks/project/:projectId` | Project Members |
+| POST | `/api/tasks` | Project Admin |
+| PATCH | `/api/tasks/:id` | Project Admin |
+| PATCH | `/api/tasks/:id/status` | Assigned Member/Admin |
+| DELETE | `/api/tasks/:id` | Project Admin |
+| GET | `/api/dashboard/:projectId` | Project Members |
 
 ---
 
-## Notes
+# Security Features
 
-- Passwords are hashed with bcrypt before storing, plain text is never saved
-- JWT tokens are stored in localStorage on the client side
-- A project always needs at least one admin — the last admin can't be removed
-- Members only see tasks assigned to them, admins see everything in the project
-- The dashboard stats are calculated server-side using MongoDB aggregation
+- Passwords are hashed before storing
+- JWT authentication with token expiry
+- Protected API routes
+- Role-based authorization
+- Users can only access project-specific resources
+
+---
+
+# Deployment Guide (Render)
+
+# Step 1: Push Project to GitHub
+
+Initialize git and push your project:
+
+```bash
+git init
+git add .
+git commit -m "Initial commit"
+git branch -M main
+git remote add origin YOUR_GITHUB_REPO_URL
+git push -u origin main
+```
+
+---
+
+# Backend Deployment on Render
+
+## 1. Open Render
+
+Go to:
+
+```bash
+https://render.com
+```
+
+## 2. Create New Web Service
+
+- Click **New +**
+- Select **Web Service**
+- Connect your GitHub repository
+
+---
+
+## 3. Configure Backend
+
+Use these settings:
+
+| Setting | Value |
+|---|---|
+| Name | team-task-manager-backend |
+| Root Directory | backend |
+| Environment | Node |
+| Build Command | npm install |
+| Start Command | npm start |
+
+---
+
+## 4. Add Environment Variables
+
+Inside Render dashboard add:
+
+```env
+PORT=5000
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_super_secret_key
+```
+
+---
+
+## 5. Deploy Backend
+
+After deployment you will get a backend URL like:
+
+```bash
+https://team-task-manager-backend.onrender.com
+```
+
+Copy this URL.
+
+---
+
+# Frontend Deployment on Render
+
+## 1. Create New Static Site
+
+- Click **New +**
+- Select **Static Site**
+- Connect same GitHub repository
+
+---
+
+## 2. Configure Frontend
+
+Use these settings:
+
+| Setting | Value |
+|---|---|
+| Name | team-task-manager-frontend |
+| Root Directory | frontend |
+| Build Command | npm run build |
+| Publish Directory | dist |
+
+---
+
+## 3. Add Frontend Environment Variable
+
+```env
+VITE_API_URL=https://team-task-manager-backend.onrender.com
+```
+
+Replace with your actual backend URL.
+
+---
+
+## 4. Deploy Frontend
+
+After deployment Render will provide a frontend URL like:
+
+```bash
+https://team-task-manager-frontend.onrender.com
+```
+
+---
+
+# Important Deployment Notes
+
+## Backend CORS Setup
+
+Make sure your backend allows frontend requests:
+
+```javascript
+app.use(
+  cors({
+    origin: "https://your-frontend-url.onrender.com",
+    credentials: true,
+  })
+);
+```
+
+---
+
+## Frontend Axios Base URL
+
+Example Axios setup:
+
+```javascript
+const API = axios.create({
+  baseURL: import.meta.env.VITE_API_URL,
+});
+```
+
+---
+
+# Future Improvements
+
+- Real-time notifications
+- WebSocket integration
+- File attachments in tasks
+- Activity logs
+- Comments on tasks
+- Email reminders
+- Team chat system
+- Dark mode support
+
+---
+
+# Notes
+
+- JWT tokens are stored in localStorage
+- MongoDB aggregation is used for dashboard statistics
+- A project must always contain at least one admin
+- Members only see tasks assigned to them
+- Admins have full project visibility
+
+---
+
+# Author
+
+Developed by Ajay 🚀
